@@ -33,11 +33,12 @@ require("plugins.luasnip")          -- Configuracion de luasnip
 require("plugins.competitest")      -- Configuración de competitest
 require("plugins.null-ls")			-- Configuracion de null-ls
 require("plugins.nvim-dap-ui")		-- Configuracion de nvim-dap-ui
-require("plugins.cmp-dap")			
-require("plugins.dap")
+require("plugins.cmp-dap")			-- Configuracion de cmp-dap
+require("plugins.dap")				-- Configuracion de dap
 require("plugins.hydra")			-- Configuracion de hydra
 require("plugins.mason-nvim-dap")   -- Configuracion de mason-nvim-dap
-require("plugins.nvim-dap-ui")
-require("plugins.nvim-dap-virtual-text")
-require("plugins.telescope-dap")
-require("plugins.harpoon")
+require("plugins.nvim-dap-ui")		-- Configuracion de nvim-dap-ui
+require("plugins.nvim-dap-virtual-text") -- Configuracion de nvim-dap-virtual-text
+require("plugins.telescope-dap")	-- Configuracion de telescope-dap
+require("plugins.harpoon")			-- Configuracion de harpoon
+require("plugins.leetcode")			-- Configuracion de leetcode
