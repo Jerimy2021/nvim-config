@@ -7,7 +7,7 @@ return {
     { "williamboman/mason-lspconfig.nvim" },
     { "mfussenegger/nvim-jdtls" },
 	
-	-- Autocompletion
+	-- Autocompletion 
 	{ "hrsh7th/nvim-cmp", event = "InsertEnter" },
     { "hrsh7th/cmp-nvim-lsp" },
     { "hrsh7th/cmp-buffer" },
@@ -83,6 +83,11 @@ return {
         				"MunifTanjim/nui.nvim",
 		}
 	},
+
+	-- copilot 
+	{"zbirenbaum/copilot.lua"},
+
+	{"zbirenbaum/copilot-cmp", dependencies = { "zbirenbaum/copilot.lua" }},
 }
 
 

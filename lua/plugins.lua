@@ -42,3 +42,5 @@ require("plugins.nvim-dap-virtual-text") -- Configuracion de nvim-dap-virtual-te
 require("plugins.telescope-dap")	-- Configuracion de telescope-dap
 require("plugins.harpoon")			-- Configuracion de harpoon
 require("plugins.leetcode")			-- Configuracion de leetcode
+require("plugins.copilot") 			-- Configuracion de copilot
+require("plugins.copilot_cmp")		-- Configuracion de copilot_cmp

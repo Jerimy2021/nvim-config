@@ -14,6 +14,7 @@ cmp.setup({
     }),
     sources = cmp.config.sources({
         { name = "nvim_lsp" }, -- Autocompletado del LSP
+		{ name = "copilot" },  -- Autocompletado de copilot
         { name = "luasnip" },  -- Snippets desde LuaSnip
         { name = "buffer" },   -- Autocompletado desde el buffer actual
         { name = "path" },     -- Autocompletado para rutas de archivos
