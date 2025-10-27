@@ -31,7 +31,6 @@ require("plugins.lualine")          -- Configuración de Lualine
 require("plugins.nvim-tree")        -- Configuración de Nvim Tree
 require("plugins.luasnip")          -- Configuracion de luasnip
 require("plugins.competitest")      -- Configuración de competitest
-require("plugins.null-ls")			-- Configuracion de null-ls
 require("plugins.nvim-dap-ui")		-- Configuracion de nvim-dap-ui
 require("plugins.cmp-dap")			-- Configuracion de cmp-dap
 require("plugins.dap")				-- Configuracion de dap

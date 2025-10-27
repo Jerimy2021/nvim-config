@@ -43,9 +43,6 @@ return {
 	-- Competitest
 	{ "xeluxee/competitest.nvim", dependencies = "MunifTanjim/nui.nvim" },
 
-	-- Null-ls
-	{ "jose-elias-alvarez/null-ls.nvim", event="VeryLazy"},
-
 	-- Mason nvim-dap
 	{ "jay-babu/mason-nvim-dap.nvim"},
 
@@ -88,6 +85,10 @@ return {
 	{"zbirenbaum/copilot.lua"},
 
 	{"zbirenbaum/copilot-cmp", dependencies = { "zbirenbaum/copilot.lua" }},
+
+	-- roslyn
+	{ "seblyng/roslyn.nvim", lazy = true, ft = "cs" },
+
 }
 
 
