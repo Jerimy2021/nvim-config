@@ -43,3 +43,4 @@ require("plugins.harpoon")			-- Configuracion de harpoon
 require("plugins.leetcode")			-- Configuracion de leetcode
 require("plugins.copilot") 			-- Configuracion de copilot
 require("plugins.copilot_cmp")		-- Configuracion de copilot_cmp
+require("plugins.which-key")		-- Configuracion de which-key

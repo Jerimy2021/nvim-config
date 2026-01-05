@@ -19,8 +19,31 @@ vim.keymap.set("n","<leader>tv",":vertical terminal<CR>")
 vim.o.number = true
 -- vim.o.relativenumber = true
 -- Formatting cpp
-vim.api.nvim_set_keymap("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>fc", ":lua vim.lsp.buf.format()<CR>", { noremap = true, silent = true })
 
 --elflord, murphy, ron, vim
 --vim.cmd("colorscheme murphy")
 
+vim.keymap.set('n', '<leader>V',
+    function()
+        -- Verifica si el archivo actual tiene una extensión de imagen
+        local file_extension = vim.fn.expand('%:e')
+        local image_extensions = { 'png', 'jpg', 'jpeg', 'gif', 'webp' }
+
+        local is_image = false
+        for _, ext in ipairs(image_extensions) do
+            if file_extension:lower() == ext then
+                is_image = true
+                break
+            end
+        end
+
+        if is_image then
+            -- Ejecuta feh en una terminal separada, sin bloquear Neovim
+            vim.cmd('silent !feh ' .. vim.fn.shellescape(vim.fn.expand('%')) .. ' &')
+        else
+            vim.notify('El archivo actual no parece ser una imagen compatible.', vim.log.levels.WARN)
+        end
+    end,
+    { desc = 'Ver imagen actual con feh' }
+)

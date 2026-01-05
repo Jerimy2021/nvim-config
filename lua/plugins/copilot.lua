@@ -5,6 +5,6 @@ require("copilot").setup({
         python = false,
         cpp = false,
         c = false, 
-        ["*"] = true, -- desactiva para los demás
+        ["*"] = true, --Activa para los demàs 
       },
     })

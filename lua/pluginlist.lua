@@ -89,6 +89,8 @@ return {
 	-- roslyn
 	{ "seblyng/roslyn.nvim", lazy = true, ft = "cs" },
 
+	-- which-key
+	{ "folke/which-key.nvim" },
 }
 
 
