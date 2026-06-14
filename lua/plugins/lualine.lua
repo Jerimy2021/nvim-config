@@ -1,3 +1,10 @@
+-- Archivo: plugins/lualine.lua
 require('lualine').setup({
-options = { theme = 'horizon' },
+  options = {
+    -- Cámbialo a: 'gruvbox', 'tokyonight', o 'auto' (para cyberdream)
+    theme = 'auto', 
+    component_separators = { left = '│', right = '│' },
+    section_separators = { left = '', right = '' },
+    globalstatus = true,
+  },
 })

@@ -115,3 +115,37 @@ dap.configurations.cpp = {
 }
 
 dap.configurations.c = dap.configurations.cpp
+
+-- 1. El adaptador: Conecta nvim-dap con netcoredbg (provisto por Nix)
+dap.adapters.coreclr = {
+  type = 'executable',
+  command = 'netcoredbg', 
+  args = {'--interpreter=vscode'}
+}
+
+dap.configurations.cs = {
+  {
+    type = "coreclr",
+    name = "Launch - netcoredbg",
+    request = "launch",
+    program = function()
+        -- Aquí va tu función de selección de DLL (la que te pasé antes)
+        -- Asegúrate de elegir: .../Supplier.Web.Host.dll
+        return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/Supplier.Web.Host/bin/Debug/net9.0/', 'file')
+    end,
+    
+    -- 👇 CWD DINÁMICO 👇
+    cwd = function()
+        -- Opción 1: Si tus configs se copian al bin (output), usa esto:
+        -- return vim.fn.fnamemodify(dap.configurations.cs[1].program(), ":h")
+        
+        -- Opción 2 (La que necesitas para log4net/appsettings):
+        -- Usar la carpeta del proyecto fuente (src/Supplier.Web.Host)
+        return vim.fn.getcwd() .. '/Supplier.Web.Host' 
+    end,
+    
+    env = {
+        ASPNETCORE_ENVIRONMENT = "Development"
+    }
+  },
+}

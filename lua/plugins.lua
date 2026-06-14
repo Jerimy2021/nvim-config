@@ -15,7 +15,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 vim.opt.rtp:prepend(lazypath)
-require("lazy").setup("pluginlist")
+require("lazy").setup("pluginlist", {
+  lockfile = vim.fn.stdpath("state") .. "/lazy-lock.json",
+})
 
 
 -- Cargar configuraciones de plugins desde archivos separados
@@ -23,10 +25,12 @@ require("plugins.treesitter")       -- Configuración de Treesitter
 require("plugins.mason")            -- Configuración de Mason
 require("plugins.nvim-cmp")         -- Configuración de nvim-cmp
 require("plugins.lspconfig")        -- Configuración de LSP
-require("plugins.telescope")     -- Configuración de Telescope
+require("plugins.telescope")     	-- Configuración de Telescope
 -- require("plugins.comment")       -- Configuración de Comment.nvim
-require("plugins.gruvbox")          -- Configuración de Gruvbox
--- require("plugins.tokyonight")    -- Configuración de Tokyo Night
+--require("plugins.gruvbox")       -- Configuración de Gruvbox
+--require("plugins.tokyonight")       -- Configuracion de tokyonight
+require("plugins.lsp_signature")    -- Configuracion de lsp_signature
+require("plugins.cyberdream")   	-- Configuración de Cyberdream
 require("plugins.lualine")          -- Configuración de Lualine
 require("plugins.nvim-tree")        -- Configuración de Nvim Tree
 require("plugins.luasnip")          -- Configuracion de luasnip
@@ -42,5 +46,6 @@ require("plugins.telescope-dap")	-- Configuracion de telescope-dap
 require("plugins.harpoon")			-- Configuracion de harpoon
 require("plugins.leetcode")			-- Configuracion de leetcode
 require("plugins.copilot") 			-- Configuracion de copilot
-require("plugins.copilot_cmp")		-- Configuracion de copilot_cmp
+require("plugins.copilotchat")		-- Configuracion de copilot-chat
 require("plugins.which-key")		-- Configuracion de which-key
+require("plugins.gitsigns")			-- Configuracion de gitsigns
