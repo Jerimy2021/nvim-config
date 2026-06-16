@@ -1,7 +1,7 @@
 vim.o.background = "light"
 
 require("tokyonight").setup({
-  style = "day",
+  style = "night",
   transparent = true,
   terminal_colors = true,
   styles = {
