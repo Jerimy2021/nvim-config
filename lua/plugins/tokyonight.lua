@@ -1,5 +1,3 @@
-vim.o.background = "light"
-
 require("tokyonight").setup({
   style = "day",
   transparent = true,
