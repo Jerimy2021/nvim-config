@@ -1,3 +1,5 @@
+vim.o.background = "light"
+
 require("tokyonight").setup({
   style = "day",
   transparent = true,
@@ -11,35 +13,42 @@ require("tokyonight").setup({
     floats = "transparent",
   },
   on_highlights = function(hl, c)
-    hl.SignColumn = { bg = "NONE" }
-    hl.LineNr = { fg = c.dark3, bg = "NONE" }
-    hl.CursorLineNr = { fg = c.red, bold = true }
-    hl.TelescopeNormal = { bg = "NONE", fg = c.fg }
-    hl.TelescopeBorder = { fg = c.blue, bg = "NONE" }
-    hl.Directory = { fg = c.blue, bold = true } 
-    hl.NvimTreeFolderIcon = { fg = c.blue7 }    
+    -- ==========================================================
+    -- COLORES ULTRA-OSCUROS (Para vencer al fondo de pantalla)
+    -- ==========================================================
     
-    -- 2. SINTAXIS BASE Y PALABRAS CLAVE (Tonos oscuros y legibles)
-    hl.Keyword = { fg = c.purple, bold = true, italic = true }
-    hl["@keyword.modifier"] = { fg = c.purple, bold = true, italic = true }
-    hl["@keyword.coroutine"] = { fg = c.purple, bold = true, italic = true }
-    hl["@keyword.exception"] = { fg = c.red, bold = true, italic = true }
-    hl["@keyword.return"] = { fg = c.red, bold = true, italic = true }
-    hl["@keyword.operator"] = { fg = c.purple, bold = true, italic = true }
-    hl.String = { fg = c.green, italic = true } -- Verde bosque
+    -- 1. INTERFAZ Y CARPETAS
+    hl.Normal = { fg = "#111111", bg = "NONE" }               -- Texto general casi negro
+    hl.SignColumn = { bg = "NONE" }
+    hl.LineNr = { fg = "#666666", bg = "NONE" }               -- Números de línea gris oscuro
+    hl.CursorLineNr = { fg = "#d70000", bold = true }         -- Número actual rojo sangre
+    hl.TelescopeNormal = { bg = "NONE", fg = "#111111" }
+    hl.TelescopeBorder = { fg = "#0000d7", bg = "NONE" }
+    hl.Directory = { fg = "#0000d7", bold = true }            -- Carpetas azul profundo
+    hl.NvimTreeFolderIcon = { fg = "#0000d7" }    
+    
+    -- 2. SINTAXIS BASE Y PALABRAS CLAVE
+    hl.Keyword = { fg = "#800080", bold = true, italic = true }          -- Púrpura oscuro
+    hl["@keyword.modifier"] = { fg = "#800080", bold = true, italic = true }
+    hl["@keyword.coroutine"] = { fg = "#800080", bold = true, italic = true }
+    hl["@keyword.exception"] = { fg = "#d70000", bold = true, italic = true } -- Rojo sangre
+    hl["@keyword.return"] = { fg = "#d70000", bold = true, italic = true }
+    hl["@keyword.operator"] = { fg = "#800080", bold = true, italic = true }
+    hl.String = { fg = "#005f00", italic = true }                        -- Verde bosque muy oscuro
+    hl.Comment = { fg = "#4e4e4e", italic = true, bold = true }          -- Comentarios gris muy fuerte
     
     -- 3. MAGIA SEMÁNTICA (Reglas universales)
-    hl["@variable"] = { fg = c.fg }                                -- Gris carbón
-    hl["@property"] = { fg = c.cyan, italic = true }               -- Teal oscuro
-    hl["@variable.member"] = { fg = c.cyan, italic = true } 
+    hl["@variable"] = { fg = "#111111" }                                 -- Variables casi negras
+    hl["@property"] = { fg = "#005f87", italic = true, bold = true }     -- Atributos teal oscuro
+    hl["@variable.member"] = { fg = "#005f87", italic = true, bold = true } 
     
-    hl["@function"] = { fg = c.blue, bold = true }                 -- Azul marino
-    hl["@function.call"] = { fg = c.blue, bold = true } 
-    hl["@method.call"] = { fg = c.blue, bold = true } 
+    hl["@function"] = { fg = "#0000d7", bold = true }                    -- Funciones azul marino
+    hl["@function.call"] = { fg = "#0000d7", bold = true } 
+    hl["@method.call"] = { fg = "#0000d7", bold = true } 
     
-    hl["@type"] = { fg = c.blue6, bold = true }                    -- Índigo
-    hl["@constructor"] = { fg = c.blue6, bold = true } 
-    hl["@parameter"] = { fg = c.orange, italic = true }            -- Naranja quemado
+    hl["@type"] = { fg = "#5f00d7", bold = true }                        -- Clases índigo oscuro
+    hl["@constructor"] = { fg = "#5f00d7", bold = true } 
+    hl["@parameter"] = { fg = "#af5f00", italic = true, bold = true }    -- Parámetros marrón/naranja quemado
     
     -- 4. EL JEFE FINAL: FORZAR AL LSP DE C#
     hl["@lsp.type.class"] = { link = "@type" }
