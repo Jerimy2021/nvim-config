@@ -1,5 +1,7 @@
+vim.o.background = "light"
+
 require("tokyonight").setup({
-  style = "night", 
+  style = "day",
   transparent = true,
   terminal_colors = true,
   styles = {
@@ -11,36 +13,35 @@ require("tokyonight").setup({
     floats = "transparent",
   },
   on_highlights = function(hl, c)
-    -- 1. INTERFAZ Y CARPETAS
     hl.SignColumn = { bg = "NONE" }
-    hl.LineNr = { fg = c.dark5, bg = "NONE" }
-    hl.CursorLineNr = { fg = c.warning, bold = true }
-    hl.TelescopeNormal = { bg = "NONE" }
+    hl.LineNr = { fg = c.dark3, bg = "NONE" }
+    hl.CursorLineNr = { fg = c.red, bold = true }
+    hl.TelescopeNormal = { bg = "NONE", fg = c.fg }
     hl.TelescopeBorder = { fg = c.blue, bg = "NONE" }
-    hl.Directory = { fg = c.cyan, bold = true } 
-    hl.NvimTreeFolderIcon = { fg = c.blue1 }    
+    hl.Directory = { fg = c.blue, bold = true } 
+    hl.NvimTreeFolderIcon = { fg = c.blue7 }    
     
-    -- 2. SINTAXIS BASE Y PALABRAS CLAVE DETALLADAS
-    hl.Keyword = { fg = c.magenta, bold = true, italic = true }
-    hl["@keyword.modifier"] = { fg = c.magenta, bold = true, italic = true } -- public, private
-    hl["@keyword.coroutine"] = { fg = c.magenta, bold = true, italic = true } -- async, await
-    hl["@keyword.exception"] = { fg = c.magenta, bold = true, italic = true } -- throw, try, catch
-    hl["@keyword.return"] = { fg = c.magenta, bold = true, italic = true } -- return
-    hl["@keyword.operator"] = { fg = c.magenta, bold = true, italic = true } -- new, typeof
-    hl.String = { fg = c.green1, italic = true }
+    -- 2. SINTAXIS BASE Y PALABRAS CLAVE (Tonos oscuros y legibles)
+    hl.Keyword = { fg = c.purple, bold = true, italic = true }
+    hl["@keyword.modifier"] = { fg = c.purple, bold = true, italic = true }
+    hl["@keyword.coroutine"] = { fg = c.purple, bold = true, italic = true }
+    hl["@keyword.exception"] = { fg = c.red, bold = true, italic = true }
+    hl["@keyword.return"] = { fg = c.red, bold = true, italic = true }
+    hl["@keyword.operator"] = { fg = c.purple, bold = true, italic = true }
+    hl.String = { fg = c.green, italic = true } -- Verde bosque
     
     -- 3. MAGIA SEMÁNTICA (Reglas universales)
-    hl["@variable"] = { fg = c.fg }                                -- Variables base
-    hl["@property"] = { fg = c.yellow, italic = true }             -- Atributos
-    hl["@variable.member"] = { fg = c.yellow, italic = true }      -- Atributos (Fallback)
+    hl["@variable"] = { fg = c.fg }                                -- Gris carbón
+    hl["@property"] = { fg = c.cyan, italic = true }               -- Teal oscuro
+    hl["@variable.member"] = { fg = c.cyan, italic = true } 
     
-    hl["@function"] = { fg = c.cyan, bold = true }                 -- Funciones
-    hl["@function.call"] = { fg = c.cyan, bold = true }            -- Funciones ejecutadas
-    hl["@method.call"] = { fg = c.cyan, bold = true }              -- Métodos ejecutados
+    hl["@function"] = { fg = c.blue, bold = true }                 -- Azul marino
+    hl["@function.call"] = { fg = c.blue, bold = true } 
+    hl["@method.call"] = { fg = c.blue, bold = true } 
     
-    hl["@type"] = { fg = c.blue1, bold = true }                    -- Clases y Tipos
-    hl["@constructor"] = { fg = c.blue1, bold = true }             -- Constructores
-    hl["@parameter"] = { fg = c.orange, italic = true }            -- Parámetros
+    hl["@type"] = { fg = c.blue6, bold = true }                    -- Índigo
+    hl["@constructor"] = { fg = c.blue6, bold = true } 
+    hl["@parameter"] = { fg = c.orange, italic = true }            -- Naranja quemado
     
     -- 4. EL JEFE FINAL: FORZAR AL LSP DE C#
     hl["@lsp.type.class"] = { link = "@type" }
