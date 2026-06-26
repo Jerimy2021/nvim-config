@@ -2,11 +2,9 @@ require("cyberdream").setup({
     transparent = true,
     italic_comments = true,
     terminal_colors = true,
-    -- Desactivamos los overrides internos del tema para que no pisen los nuestros
     theme = {
         variant = "default",
         highlights = {
-            -- Forzar fondo transparente en el editor principal
             Normal = { bg = "NONE" },
             NormalNC = { bg = "NONE" },
         },
@@ -16,164 +14,151 @@ require("cyberdream").setup({
 vim.cmd("colorscheme cyberdream")
 
 -- =============================================================================
--- PALETA NEÓN CYBERPUNK PARA FONDO TRANSPARENTE
+-- PALETA "DARK CYBERPUNK" PARA WALLPAPER CLARO + TRANSPARENCIA
 -- =============================================================================
--- REGLA DE ORO: Con transparencia activa y wallpaper claro, TODOS los colores
--- de texto deben ser brillantes y saturados. Cero colores oscuros (#0f172a, etc).
+-- DIAGNÓSTICO: Con Kitty opacity = 0.32 y wallpaper claro/medio, el fondo
+-- efectivo del editor es ~70% gris claro. Por eso los colores neón claros
+-- (verde lima, cyan claro, blanco) desaparecen — no hay contraste.
 --
--- La legibilidad se logra de dos formas:
---   1. Texto del editor     → Colores neón brillantes (contrastan contra todo)
---   2. Ventanas flotantes   → Fondo semi-opaco oscuro (#0a0a1a) para aislar del wallpaper
+-- ESTRATEGIA: Colores OSCUROS y MUY saturados para el código. Mantienen el
+-- espíritu cyberpunk (magenta profundo, púrpura, índigo) pero con suficiente
+-- contraste contra gris claro. Para ventanas flotantes (which-key, telescope)
+-- se fuerza un fondo oscuro sólido para que ahí sí brillen los neones.
 -- =============================================================================
 
 local palette = {
-    -- Neones primarios
-    pink      = "#ff2a6d",   -- Keywords, palabras reservadas
-    cyan      = "#05d9e8",   -- Variables
-    green     = "#00ff9f",   -- Strings
-    blue      = "#7aa2f7",   -- Funciones y métodos
-    purple    = "#bd93f9",   -- Tipos, clases, constructores
-    orange    = "#ffb86c",   -- Propiedades y campos
-    red       = "#ff6e6e",   -- Booleanos y números
-    sky       = "#8be9fd",   -- Parámetros
-    lavender  = "#c792ea",   -- Módulos y namespaces
-    yellow    = "#f1fa8c",   -- Advertencias y acentos
+    -- Colores principales (oscuros + saturados, para fondo claro)
+    magenta    = "#c2185b",
+    indigo     = "#1a237e",
+    purple     = "#4a148c",
+    teal       = "#00695c",
+    forest     = "#1b5e20",
+    crimson    = "#b71c1c",
+    burnt      = "#bf360c",
+    wine       = "#880e4f",
+    deep_blue  = "#0d47a1",
+    black      = "#000000",
+    slate      = "#455a64",
 
-    -- Neutros para estructura
-    white     = "#e2e8f0",   -- Operadores, puntuación, texto general
-    gray      = "#6272a4",   -- Comentarios
-    line_nr   = "#565f89",   -- Números de línea
-    cursor_nr = "#ff2a6d",   -- Línea actual
+    -- Acentos UI
+    hot_pink   = "#ff1744",
+    amber      = "#ff6f00",
+    yellow_hi  = "#fdd835",
 
-    -- Fondos flotantes (semi-opacos para aislar del wallpaper)
-    float_bg  = "#0a0a1a",   -- Fondo de ventanas flotantes
-    float_border = "#414868", -- Bordes de ventanas flotantes
+    -- Líneas y separadores
+    line_nr    = "#9e9e9e",
+    border     = "#37474f",
+
+    -- Fondos de ventanas FLOTANTES
+    float_bg     = "#0a0a14",
+    float_bg_alt = "#13131f",
+    float_border = "#7c4dff",
+
+    -- Neones SOLO para uso dentro de flotantes (fondo oscuro)
+    neon_pink   = "#ff2a6d",
+    neon_cyan   = "#05d9e8",
+    neon_green  = "#00ff9f",
+    neon_blue   = "#7aa2f7",
+    neon_purple = "#bd93f9",
+    neon_orange = "#ffb86c",
+    neon_white  = "#e2e8f0",
 }
 
 local highlights = {
-
-    -- =========================================================================
     -- 1. INTERFAZ BASE
-    -- =========================================================================
-    Normal         = { fg = palette.white, bg = "NONE" },
+    Normal         = { fg = palette.black, bg = "NONE" },
     NormalNC       = { bg = "NONE" },
     SignColumn     = { bg = "NONE" },
     LineNr         = { fg = palette.line_nr, bg = "NONE" },
-    CursorLineNr   = { fg = palette.cursor_nr, bold = true, bg = "NONE" },
-    CursorLine     = { bg = "#1a1a2e" },
-    Visual         = { bg = "#2d2b55" },
-    Search         = { fg = "#000000", bg = palette.yellow, bold = true },
-    IncSearch      = { fg = "#000000", bg = palette.orange, bold = true },
-    VertSplit      = { fg = palette.float_border, bg = "NONE" },
-    WinSeparator   = { fg = palette.float_border, bg = "NONE" },
-    EndOfBuffer    = { fg = "#1a1a2e", bg = "NONE" },
-    NonText        = { fg = "#2d2b55" },
+    CursorLineNr   = { fg = palette.hot_pink, bold = true, bg = "NONE" },
+    CursorLine     = { bg = "NONE" },
+    Visual         = { bg = "#7c4dff", fg = "#ffffff", bold = true },
+    Search         = { fg = palette.black, bg = palette.yellow_hi, bold = true },
+    IncSearch      = { fg = "#ffffff", bg = palette.amber, bold = true },
+    VertSplit      = { fg = palette.border, bg = "NONE" },
+    WinSeparator   = { fg = palette.border, bg = "NONE" },
+    EndOfBuffer    = { fg = "#e0e0e0", bg = "NONE" },
+    NonText        = { fg = "#bdbdbd" },
+    Whitespace     = { fg = "#cfd8dc" },
 
-    -- Ventanas flotantes (CRÍTICO: fondo oscuro para legibilidad)
-    NormalFloat    = { fg = palette.white, bg = palette.float_bg },
-    FloatBorder    = { fg = palette.sky, bg = palette.float_bg },
-    FloatTitle     = { fg = palette.pink, bg = palette.float_bg, bold = true },
+    -- 2. KEYWORDS (Magenta oscuro saturado)
+    Keyword                    = { fg = palette.magenta, bold = true, italic = true },
+    Statement                  = { fg = palette.magenta, bold = true, italic = true },
+    Conditional                = { fg = palette.magenta, bold = true, italic = true },
+    Repeat                     = { fg = palette.magenta, bold = true, italic = true },
+    Exception                  = { fg = palette.magenta, bold = true, italic = true },
+    Include                    = { fg = palette.magenta, bold = true, italic = true },
+    StorageClass               = { fg = palette.magenta, bold = true, italic = true },
+    ["@keyword"]               = { fg = palette.magenta, bold = true, italic = true },
+    ["@keyword.modifier"]      = { fg = palette.magenta, bold = true, italic = true },
+    ["@keyword.coroutine"]     = { fg = palette.magenta, bold = true, italic = true },
+    ["@keyword.exception"]     = { fg = palette.magenta, bold = true, italic = true },
+    ["@keyword.return"]        = { fg = palette.magenta, bold = true, italic = true },
+    ["@keyword.import"]        = { fg = palette.magenta, bold = true, italic = true },
+    ["@keyword.conditional"]   = { fg = palette.magenta, bold = true, italic = true },
+    ["@keyword.repeat"]        = { fg = palette.magenta, bold = true, italic = true },
+    ["@keyword.operator"]      = { fg = palette.magenta, bold = true },
 
-    -- Menú de autocompletado (Pmenu)
-    Pmenu          = { fg = palette.white, bg = palette.float_bg },
-    PmenuSel       = { fg = "#000000", bg = palette.blue, bold = true },
-    PmenuSbar      = { bg = "#1a1a2e" },
-    PmenuThumb     = { bg = palette.blue },
+    -- 3. VARIABLES (Teal oscuro)
+    ["@variable"]              = { fg = palette.teal, bold = true },
+    ["@variable.member"]       = { fg = palette.burnt, bold = true },
+    ["@variable.parameter"]    = { fg = palette.deep_blue, italic = true },
+    ["@variable.builtin"]      = { fg = palette.wine, italic = true, bold = true },
+    ["@field"]                 = { fg = palette.burnt, bold = true },
+    ["@property"]              = { fg = palette.burnt, italic = true, bold = true },
+    Identifier                 = { fg = palette.teal },
 
-    -- =========================================================================
-    -- 2. PALABRAS CLAVE (Rosa Neón Eléctrico)
-    -- =========================================================================
-    Keyword                    = { fg = palette.pink, bold = true, italic = true },
-    Statement                  = { fg = palette.pink, bold = true, italic = true },
-    Conditional                = { fg = palette.pink, bold = true, italic = true },
-    Repeat                     = { fg = palette.pink, bold = true, italic = true },
-    Exception                  = { fg = palette.pink, bold = true, italic = true },
-    Include                    = { fg = palette.pink, bold = true, italic = true },
-    ["@keyword"]               = { fg = palette.pink, bold = true, italic = true },
-    ["@keyword.modifier"]      = { fg = palette.pink, bold = true, italic = true },
-    ["@keyword.coroutine"]     = { fg = palette.pink, bold = true, italic = true },
-    ["@keyword.exception"]     = { fg = palette.pink, bold = true, italic = true },
-    ["@keyword.return"]        = { fg = palette.pink, bold = true, italic = true },
-    ["@keyword.import"]        = { fg = palette.pink, bold = true, italic = true },
-    ["@keyword.conditional"]   = { fg = palette.pink, bold = true, italic = true },
-    ["@keyword.repeat"]        = { fg = palette.pink, bold = true, italic = true },
-    ["@keyword.operator"]      = { fg = palette.pink, bold = true },
+    -- 4. STRINGS (Verde bosque saturado)
+    String                     = { fg = palette.forest, italic = true, bold = true },
+    ["@string"]                = { fg = palette.forest, italic = true, bold = true },
+    ["@string.escape"]         = { fg = palette.amber, bold = true },
+    ["@string.special"]        = { fg = palette.amber, bold = true },
+    Character                  = { fg = palette.forest, bold = true },
 
-    -- =========================================================================
-    -- 3. VARIABLES Y CAMPOS (Cyan Neón)
-    -- =========================================================================
-    ["@variable"]              = { fg = palette.cyan, bold = true },
-    ["@variable.member"]       = { fg = palette.orange, bold = true },
-    ["@variable.parameter"]    = { fg = palette.sky, italic = true },
-    ["@variable.builtin"]      = { fg = palette.sky, italic = true, bold = true },
-    ["@field"]                 = { fg = palette.orange, bold = true },
-    ["@property"]              = { fg = palette.orange, italic = true, bold = true },
-    Identifier                 = { fg = palette.cyan },
+    -- 5. FUNCIONES (Índigo oscuro)
+    Function                   = { fg = palette.indigo, bold = true },
+    ["@function"]              = { fg = palette.indigo, bold = true },
+    ["@function.call"]         = { fg = palette.indigo, bold = true },
+    ["@function.builtin"]      = { fg = palette.indigo, bold = true, italic = true },
+    ["@method"]                = { fg = palette.indigo, bold = true },
+    ["@method.call"]           = { fg = palette.indigo, bold = true },
 
-    -- =========================================================================
-    -- 4. STRINGS (Verde Neón Cyberpunk)
-    -- =========================================================================
-    String                     = { fg = palette.green, italic = true },
-    ["@string"]                = { fg = palette.green, italic = true },
-    ["@string.escape"]         = { fg = palette.yellow, bold = true },
-    ["@string.special"]        = { fg = palette.yellow },
-    Character                  = { fg = palette.green },
-
-    -- =========================================================================
-    -- 5. FUNCIONES Y MÉTODOS (Azul Periwinkle)
-    -- =========================================================================
-    Function                   = { fg = palette.blue, bold = true },
-    ["@function"]              = { fg = palette.blue, bold = true },
-    ["@function.call"]         = { fg = palette.blue, bold = true },
-    ["@function.builtin"]      = { fg = palette.blue, bold = true, italic = true },
-    ["@method"]                = { fg = palette.blue, bold = true },
-    ["@method.call"]           = { fg = palette.blue, bold = true },
-
-    -- =========================================================================
-    -- 6. TIPOS, CLASES Y NAMESPACES (Púrpura Neón)
-    -- =========================================================================
+    -- 6. TIPOS, CLASES, NAMESPACES (Púrpura profundo)
     Type                       = { fg = palette.purple, bold = true },
     ["@type"]                  = { fg = palette.purple, bold = true },
     ["@type.builtin"]          = { fg = palette.purple, bold = true, italic = true },
-    ["@type.qualifier"]        = { fg = palette.pink, italic = true },
+    ["@type.qualifier"]        = { fg = palette.magenta, italic = true },
     ["@constructor"]           = { fg = palette.purple, bold = true },
-    ["@module"]                = { fg = palette.lavender, bold = true },
-    ["@parameter"]             = { fg = palette.sky, italic = true },
+    ["@module"]                = { fg = palette.wine, bold = true },
+    ["@parameter"]             = { fg = palette.deep_blue, italic = true },
 
-    -- =========================================================================
-    -- 7. BOOLEANOS Y NÚMEROS (Rojo Coral Brillante)
-    -- =========================================================================
-    ["@boolean"]               = { fg = palette.red, bold = true },
-    ["@number"]                = { fg = palette.red, bold = true },
-    ["@number.float"]          = { fg = palette.red, bold = true },
-    Boolean                    = { fg = palette.red, bold = true },
-    Number                     = { fg = palette.red, bold = true },
-    Float                      = { fg = palette.red, bold = true },
+    -- 7. BOOLEANOS Y NÚMEROS (Carmesí)
+    ["@boolean"]               = { fg = palette.crimson, bold = true },
+    ["@number"]                = { fg = palette.crimson, bold = true },
+    ["@number.float"]          = { fg = palette.crimson, bold = true },
+    Boolean                    = { fg = palette.crimson, bold = true },
+    Number                     = { fg = palette.crimson, bold = true },
+    Float                      = { fg = palette.crimson, bold = true },
 
-    -- =========================================================================
-    -- 8. OPERADORES Y PUNTUACIÓN (Blanco Brillante)
-    -- =========================================================================
-    Operator                   = { fg = palette.white, bold = true },
-    ["@operator"]              = { fg = palette.white, bold = true },
-    ["@punctuation.bracket"]   = { fg = palette.white, bold = true },
-    ["@punctuation.delimiter"] = { fg = palette.white, bold = true },
-    ["@punctuation.special"]   = { fg = palette.white, bold = true },
-    Delimiter                  = { fg = palette.white },
-    Special                    = { fg = palette.orange },
+    -- 8. OPERADORES Y PUNTUACIÓN (Negro absoluto)
+    Operator                   = { fg = palette.black, bold = true },
+    ["@operator"]              = { fg = palette.black, bold = true },
+    ["@punctuation.bracket"]   = { fg = palette.black, bold = true },
+    ["@punctuation.delimiter"] = { fg = palette.black, bold = true },
+    ["@punctuation.special"]   = { fg = palette.black, bold = true },
+    Delimiter                  = { fg = palette.black, bold = true },
+    Special                    = { fg = palette.burnt, bold = true },
 
-    -- =========================================================================
-    -- 9. COMENTARIOS (Gris Azulado Suave)
-    -- =========================================================================
-    Comment                    = { fg = palette.gray, italic = true },
-    ["@comment"]               = { fg = palette.gray, italic = true },
-    ["@comment.todo"]          = { fg = "#000000", bg = palette.yellow, bold = true },
-    ["@comment.note"]          = { fg = "#000000", bg = palette.sky, bold = true },
-    ["@comment.warning"]       = { fg = "#000000", bg = palette.orange, bold = true },
-    ["@comment.error"]         = { fg = "#000000", bg = palette.red, bold = true },
+    -- 9. COMENTARIOS Y GIT BLAME INLINE
+    Comment                    = { fg = palette.slate, italic = true, bold = true },
+    ["@comment"]               = { fg = palette.slate, italic = true, bold = true },
+    ["@comment.todo"]          = { fg = "#ffffff", bg = palette.amber, bold = true },
+    ["@comment.note"]          = { fg = "#ffffff", bg = palette.indigo, bold = true },
+    ["@comment.warning"]       = { fg = "#ffffff", bg = palette.burnt, bold = true },
+    ["@comment.error"]         = { fg = "#ffffff", bg = palette.crimson, bold = true },
+    GitSignsCurrentLineBlame   = { fg = palette.slate, italic = true, bold = true },
 
-    -- =========================================================================
     -- 10. LSP SEMANTIC TOKENS (C# / Roslyn)
-    -- =========================================================================
     ["@lsp.type.class"]        = { link = "@type" },
     ["@lsp.type.struct"]       = { link = "@type" },
     ["@lsp.type.interface"]    = { fg = palette.purple, italic = true, bold = true },
@@ -190,130 +175,119 @@ local highlights = {
     ["@lsp.mod.readonly"]      = { italic = true },
     ["@lsp.mod.static"]        = { bold = true },
 
-    -- =========================================================================
-    -- 11. TELESCOPE (Fondo aislado del wallpaper)
-    -- =========================================================================
-    TelescopeNormal            = { fg = palette.white, bg = palette.float_bg },
+    -- 11. VENTANAS FLOTANTES BASE
+    NormalFloat                = { fg = palette.neon_white, bg = palette.float_bg },
+    FloatBorder                = { fg = palette.float_border, bg = palette.float_bg },
+    FloatTitle                 = { fg = palette.neon_pink, bg = palette.float_bg, bold = true },
+    Pmenu                      = { fg = palette.neon_white, bg = palette.float_bg },
+    PmenuSel                   = { fg = palette.black, bg = palette.neon_cyan, bold = true },
+    PmenuSbar                  = { bg = palette.float_bg_alt },
+    PmenuThumb                 = { bg = palette.float_border },
+
+    -- 12. TELESCOPE
+    TelescopeNormal            = { fg = palette.neon_white, bg = palette.float_bg },
     TelescopeBorder            = { fg = palette.float_border, bg = palette.float_bg },
-    TelescopeTitle             = { fg = palette.pink, bg = palette.float_bg, bold = true },
-    TelescopePromptNormal      = { fg = palette.white, bg = "#111122" },
-    TelescopePromptBorder      = { fg = palette.pink, bg = "#111122" },
-    TelescopePromptTitle       = { fg = palette.pink, bg = "#111122", bold = true },
-    TelescopePromptPrefix      = { fg = palette.pink, bg = "#111122" },
-    TelescopeResultsNormal     = { fg = palette.white, bg = palette.float_bg },
+    TelescopeTitle             = { fg = palette.neon_pink, bg = palette.float_bg, bold = true },
+    TelescopePromptNormal      = { fg = palette.neon_white, bg = palette.float_bg_alt },
+    TelescopePromptBorder      = { fg = palette.neon_pink, bg = palette.float_bg_alt },
+    TelescopePromptTitle       = { fg = palette.neon_pink, bg = palette.float_bg_alt, bold = true },
+    TelescopePromptPrefix      = { fg = palette.neon_pink, bg = palette.float_bg_alt },
+    TelescopeResultsNormal     = { fg = palette.neon_white, bg = palette.float_bg },
     TelescopeResultsBorder     = { fg = palette.float_border, bg = palette.float_bg },
-    TelescopePreviewNormal     = { fg = palette.white, bg = palette.float_bg },
+    TelescopePreviewNormal     = { fg = palette.neon_white, bg = palette.float_bg },
     TelescopePreviewBorder     = { fg = palette.float_border, bg = palette.float_bg },
-    TelescopeSelection         = { fg = palette.cyan, bg = "#1a1a3e", bold = true },
-    TelescopeMatching          = { fg = palette.pink, bold = true },
+    TelescopeSelection         = { fg = palette.neon_cyan, bg = "#1a1a3e", bold = true },
+    TelescopeSelectionCaret    = { fg = palette.neon_pink, bg = "#1a1a3e", bold = true },
+    TelescopeMatching          = { fg = palette.neon_pink, bold = true },
 
-    -- =========================================================================
-    -- 12. WHICH-KEY (FIX PRINCIPAL - Fondo aislado + colores neón)
-    -- =========================================================================
-    WhichKey                   = { fg = palette.cyan, bold = true },        -- Las teclas (1, 2, e, f, etc.)
-    WhichKeyGroup              = { fg = palette.pink, bold = true },        -- Nombres de grupos (+)
-    WhichKeyDesc               = { fg = palette.white },                    -- Descripción de acciones
-    WhichKeySeparator          = { fg = palette.gray },                     -- El separador (→)
-    WhichKeyFloat              = { bg = palette.float_bg },                 -- Fondo de la ventana
+    -- 13. WHICH-KEY (FIX CRÍTICO)
+    WhichKey                   = { fg = palette.neon_cyan, bold = true },
+    WhichKeyGroup              = { fg = palette.neon_pink, bold = true },
+    WhichKeyDesc               = { fg = palette.neon_white },
+    WhichKeySeparator          = { fg = "#6272a4" },
+    WhichKeyFloat              = { bg = palette.float_bg },
     WhichKeyBorder             = { fg = palette.float_border, bg = palette.float_bg },
-    WhichKeyNormal             = { fg = palette.white, bg = palette.float_bg },
-    WhichKeyTitle              = { fg = palette.pink, bg = palette.float_bg, bold = true },
-    WhichKeyValue              = { fg = palette.orange },
-    WhichKeyIconBlue           = { fg = palette.blue },
-    WhichKeyIconCyan           = { fg = palette.cyan },
-    WhichKeyIconGreen          = { fg = palette.green },
-    WhichKeyIconOrange         = { fg = palette.orange },
-    WhichKeyIconPurple         = { fg = palette.purple },
-    WhichKeyIconRed            = { fg = palette.red },
-    WhichKeyIconYellow         = { fg = palette.yellow },
+    WhichKeyNormal             = { fg = palette.neon_white, bg = palette.float_bg },
+    WhichKeyTitle              = { fg = palette.neon_pink, bg = palette.float_bg, bold = true },
+    WhichKeyValue              = { fg = palette.neon_orange },
+    WhichKeyIconBlue           = { fg = palette.neon_blue },
+    WhichKeyIconCyan           = { fg = palette.neon_cyan },
+    WhichKeyIconGreen          = { fg = palette.neon_green },
+    WhichKeyIconOrange         = { fg = palette.neon_orange },
+    WhichKeyIconPurple         = { fg = palette.neon_purple },
+    WhichKeyIconRed            = { fg = "#ff5555" },
+    WhichKeyIconYellow         = { fg = "#f1fa8c" },
 
-    -- =========================================================================
-    -- 13. DIAGNÓSTICOS LSP
-    -- =========================================================================
-    DiagnosticError            = { fg = "#ff5555" },
-    DiagnosticWarn             = { fg = palette.yellow },
-    DiagnosticInfo             = { fg = palette.sky },
-    DiagnosticHint             = { fg = palette.green },
-    DiagnosticVirtualTextError = { fg = "#ff5555", italic = true },
-    DiagnosticVirtualTextWarn  = { fg = palette.yellow, italic = true },
-    DiagnosticVirtualTextInfo  = { fg = palette.sky, italic = true },
-    DiagnosticVirtualTextHint  = { fg = palette.green, italic = true },
-    DiagnosticUnderlineError   = { undercurl = true, sp = "#ff5555" },
-    DiagnosticUnderlineWarn    = { undercurl = true, sp = palette.yellow },
+    -- 14. DIAGNÓSTICOS LSP
+    DiagnosticError            = { fg = palette.crimson, bold = true },
+    DiagnosticWarn             = { fg = palette.amber, bold = true },
+    DiagnosticInfo             = { fg = palette.indigo, bold = true },
+    DiagnosticHint             = { fg = palette.teal, bold = true },
+    DiagnosticVirtualTextError = { fg = palette.crimson, italic = true, bold = true },
+    DiagnosticVirtualTextWarn  = { fg = palette.amber, italic = true, bold = true },
+    DiagnosticVirtualTextInfo  = { fg = palette.indigo, italic = true, bold = true },
+    DiagnosticVirtualTextHint  = { fg = palette.teal, italic = true, bold = true },
+    DiagnosticUnderlineError   = { undercurl = true, sp = palette.crimson },
+    DiagnosticUnderlineWarn    = { undercurl = true, sp = palette.amber },
 
-    -- =========================================================================
-    -- 14. GIT SIGNS
-    -- =========================================================================
-    GitSignsAdd                = { fg = palette.green, bg = "NONE" },
-    GitSignsChange             = { fg = palette.yellow, bg = "NONE" },
-    GitSignsDelete             = { fg = palette.red, bg = "NONE" },
+    -- 15. GIT SIGNS
+    GitSignsAdd                = { fg = palette.forest, bg = "NONE", bold = true },
+    GitSignsChange             = { fg = palette.amber, bg = "NONE", bold = true },
+    GitSignsDelete             = { fg = palette.crimson, bg = "NONE", bold = true },
 
-    -- =========================================================================
-    -- 15. NVIM-DAP-UI (Debug con fondo aislado)
-    -- =========================================================================
-    DapUIScope                 = { fg = palette.cyan, bold = true },
-    DapUIType                  = { fg = palette.purple },
-    DapUIValue                 = { fg = palette.green },
-    DapUIVariable              = { fg = palette.cyan },
-    DapUIModifiedValue         = { fg = palette.orange, bold = true },
-    DapUIBreakpointsPath       = { fg = palette.sky },
-    DapUIBreakpointsInfo       = { fg = palette.green },
-    DapUIStoppedThread         = { fg = palette.pink, bold = true },
-    DapUIFloatNormal           = { fg = palette.white, bg = palette.float_bg },
+    -- 16. DAP-UI
+    DapUIScope                 = { fg = palette.neon_cyan, bold = true },
+    DapUIType                  = { fg = palette.neon_purple },
+    DapUIValue                 = { fg = palette.neon_green },
+    DapUIVariable              = { fg = palette.neon_cyan },
+    DapUIModifiedValue         = { fg = palette.neon_orange, bold = true },
+    DapUIBreakpointsPath       = { fg = palette.neon_blue },
+    DapUIBreakpointsInfo       = { fg = palette.neon_green },
+    DapUIStoppedThread         = { fg = palette.neon_pink, bold = true },
+    DapUIFloatNormal           = { fg = palette.neon_white, bg = palette.float_bg },
     DapUIFloatBorder           = { fg = palette.float_border, bg = palette.float_bg },
 
-    -- =========================================================================
-    -- 16. NVIM-CMP (Autocompletado)
-    -- =========================================================================
-    CmpItemAbbr                = { fg = palette.white },
-    CmpItemAbbrMatch           = { fg = palette.cyan, bold = true },
-    CmpItemAbbrMatchFuzzy      = { fg = palette.sky },
-    CmpItemKindFunction        = { fg = palette.blue },
-    CmpItemKindMethod          = { fg = palette.blue },
-    CmpItemKindVariable        = { fg = palette.cyan },
-    CmpItemKindKeyword         = { fg = palette.pink },
-    CmpItemKindText            = { fg = palette.white },
-    CmpItemKindClass           = { fg = palette.purple },
-    CmpItemKindInterface       = { fg = palette.purple },
-    CmpItemKindProperty        = { fg = palette.orange },
-    CmpItemKindSnippet         = { fg = palette.green },
-    CmpItemKindField           = { fg = palette.orange },
-    CmpItemKindModule          = { fg = palette.lavender },
+    -- 17. NVIM-CMP
+    CmpItemAbbr                = { fg = palette.neon_white },
+    CmpItemAbbrMatch           = { fg = palette.neon_cyan, bold = true },
+    CmpItemAbbrMatchFuzzy      = { fg = palette.neon_pink, bold = true },
+    CmpItemKindFunction        = { fg = palette.neon_blue },
+    CmpItemKindMethod          = { fg = palette.neon_blue },
+    CmpItemKindVariable        = { fg = palette.neon_cyan },
+    CmpItemKindKeyword         = { fg = palette.neon_pink },
+    CmpItemKindText            = { fg = palette.neon_white },
+    CmpItemKindClass           = { fg = palette.neon_purple },
+    CmpItemKindInterface       = { fg = palette.neon_purple },
+    CmpItemKindProperty        = { fg = palette.neon_orange },
+    CmpItemKindSnippet         = { fg = palette.neon_green },
+    CmpItemKindField           = { fg = palette.neon_orange },
+    CmpItemKindModule          = { fg = palette.neon_purple, italic = true },
 
-    -- =========================================================================
-    -- 17. NVIM-TREE (Explorador de archivos)
-    -- =========================================================================
-    NvimTreeNormal             = { fg = palette.white, bg = palette.float_bg },
-    NvimTreeNormalNC           = { fg = palette.white, bg = palette.float_bg },
+    -- 18. NVIM-TREE
+    NvimTreeNormal             = { fg = palette.neon_white, bg = palette.float_bg },
+    NvimTreeNormalNC           = { fg = palette.neon_white, bg = palette.float_bg },
     NvimTreeWinSeparator       = { fg = palette.float_border, bg = "NONE" },
-    NvimTreeFolderName         = { fg = palette.blue, bold = true },
-    NvimTreeOpenedFolderName   = { fg = palette.cyan, bold = true },
-    NvimTreeRootName           = { fg = palette.pink, bold = true },
-    NvimTreeGitDirty           = { fg = palette.yellow },
-    NvimTreeGitNew             = { fg = palette.green },
+    NvimTreeFolderName         = { fg = palette.neon_blue, bold = true },
+    NvimTreeOpenedFolderName   = { fg = palette.neon_cyan, bold = true },
+    NvimTreeRootName           = { fg = palette.neon_pink, bold = true },
+    NvimTreeGitDirty           = { fg = "#f1fa8c" },
+    NvimTreeGitNew             = { fg = palette.neon_green },
+    NvimTreeIndentMarker       = { fg = "#414868" },
 
-    -- =========================================================================
-    -- 18. HARPOON
-    -- =========================================================================
-    HarpoonWindow              = { fg = palette.white, bg = palette.float_bg },
-    HarpoonBorder              = { fg = palette.sky, bg = palette.float_bg },
+    -- 19. HARPOON
+    HarpoonWindow              = { fg = palette.neon_white, bg = palette.float_bg },
+    HarpoonBorder              = { fg = palette.float_border, bg = palette.float_bg },
 
-    -- =========================================================================
-    -- 19. COPILOT
-    -- =========================================================================
-    CopilotSuggestion          = { fg = "#4a5568", italic = true },
-    CopilotAnnotation          = { fg = "#4a5568", italic = true },
+    -- 20. COPILOT
+    CopilotSuggestion          = { fg = "#8e9aaf", italic = true },
+    CopilotAnnotation          = { fg = "#8e9aaf", italic = true },
 }
 
--- Aplicar todos los highlights
 for group, hl in pairs(highlights) do
     vim.api.nvim_set_hl(0, group, hl)
 end
 
--- =========================================================================
--- FIX: Reaplicar highlights después de que el colorscheme cargue
--- Esto previene que lazy-loading de plugins pise nuestros colores
--- =========================================================================
+-- Reaplicar después de cambios de colorscheme (anti-pisado por plugins lazy)
 vim.api.nvim_create_autocmd("ColorScheme", {
     pattern = "*",
     callback = function()
