@@ -7,41 +7,38 @@ require("cyberdream").setup({
 vim.cmd("colorscheme cyberdream")
 
 local custom_colors = {
-    -- 1. INTERFAZ Y BORDES
+    -- 1. INTERFAZ Y BORDES (Gris muy oscuro para que se lea)
     SignColumn = { bg = "NONE" }, 
-    LineNr = { fg = "#5c6370", bg = "NONE" },
-    CursorLineNr = { fg = "#00ffc8", bold = true, bg = "NONE" },
+    LineNr = { fg = "#8a9199", bg = "NONE" },
+    CursorLineNr = { fg = "#ff0055", bold = true, bg = "NONE" }, -- Rosa sangre para la línea actual
     TelescopeNormal = { bg = "NONE" },
-    TelescopeBorder = { fg = "#3c4048", bg = "NONE" },
+    TelescopeBorder = { fg = "#1a1c23", bg = "NONE" },
     
-    -- 2. PALABRAS CLAVE (Rosa Neón Absoluto)
-    Keyword = { fg = "#ff5ea0", bold = true, italic = true },
-    ["@keyword"] = { fg = "#ff5ea0", bold = true, italic = true },
-    ["@keyword.modifier"] = { fg = "#ff5ea0", bold = true, italic = true }, -- public, private, protected
-    ["@keyword.coroutine"] = { fg = "#ff5ea0", bold = true, italic = true }, -- async, await
-    ["@keyword.exception"] = { fg = "#ff5ea0", bold = true, italic = true }, -- throw, try, catch
-    ["@keyword.return"] = { fg = "#ff5ea0", bold = true, italic = true }, -- return
-    ["@keyword.operator"] = { fg = "#ff5ea0", bold = true, italic = true }, -- new, typeof
+    -- 2. PALABRAS CLAVE (Fucsia/Carmín Tóxico)
+    Keyword = { fg = "#e6005c", bold = true, italic = true },
+    ["@keyword"] = { fg = "#e6005c", bold = true, italic = true },
+    ["@keyword.modifier"] = { fg = "#e6005c", bold = true, italic = true },
+    ["@keyword.coroutine"] = { fg = "#e6005c", bold = true, italic = true },
+    ["@keyword.exception"] = { fg = "#e6005c", bold = true, italic = true },
+    ["@keyword.return"] = { fg = "#e6005c", bold = true, italic = true },
+    ["@keyword.operator"] = { fg = "#e6005c", bold = true, italic = true },
     
-    -- 3. TEXTOS Y VARIABLES (Reglas Universales)
-    String = { fg = "#f1fa8c", italic = true },                       -- Textos (Amarillo)
-    ["@variable"] = { fg = "#ffffff" },                               -- Variables base (Blanco)
-    ["@property"] = { fg = "#ffb86c", italic = true },                -- Atributos (Naranja claro)
+    -- 3. TEXTOS Y VARIABLES
+    String = { fg = "#d97706", italic = true },                       -- Textos (Ámbar/Amarillo Quemado)
+    ["@variable"] = { fg = "#111827", bold = true },                  -- Variables (Casi negro para máxima lectura)
+    ["@property"] = { fg = "#c2410c", italic = true },                -- Atributos (Naranja Óxido)
     
     -- 4. FUNCIONES Y CLASES
-    ["@function"] = { fg = "#00ffc8", bold = true },                  -- Funciones (Cyan)
-    ["@function.call"] = { fg = "#00ffc8", bold = true },             -- Funciones ejecutadas (Cyan)
-    ["@method"] = { fg = "#00ffc8", bold = true },                    -- Métodos (Cyan)
-    ["@method.call"] = { fg = "#00ffc8", bold = true },               -- Métodos ejecutados (Cyan)
+    ["@function"] = { fg = "#0369a1", bold = true },                  -- Funciones (Azul Eléctrico Profundo)
+    ["@function.call"] = { fg = "#0369a1", bold = true },
+    ["@method"] = { fg = "#0369a1", bold = true },
+    ["@method.call"] = { fg = "#0369a1", bold = true },
     
-    ["@type"] = { fg = "#bd93f9", bold = true },                      -- Clases y Tipos (Púrpura)
-    ["@constructor"] = { fg = "#bd93f9", bold = true },               -- Constructores (Púrpura)
-    ["@parameter"] = { fg = "#8be9fd", italic = true },               -- Parámetros (Celeste claro)
+    ["@type"] = { fg = "#6b21a8", bold = true },                      -- Clases y Tipos (Morado Veneno)
+    ["@constructor"] = { fg = "#6b21a8", bold = true },
+    ["@parameter"] = { fg = "#0f766e", italic = true },               -- Parámetros (Verde/Cyan Oscuro)
 
-    -- ==========================================================
-    -- 5. EL JEFE FINAL: LSP SEMANTIC TOKENS (C# Roslyn / Java)
-    -- Obligamos al autocompletado a respetar los colores de arriba
-    -- ==========================================================
+    -- 5. LSP SEMANTIC TOKENS
     ["@lsp.type.class"] = { link = "@type" },
     ["@lsp.type.interface"] = { link = "@type" },
     ["@lsp.type.method"] = { link = "@function" },
@@ -50,7 +47,6 @@ local custom_colors = {
     ["@lsp.type.parameter"] = { link = "@parameter" },
 }
 
--- Bucle que inyecta todos estos colores en el núcleo de Neovim
 for group, hl in pairs(custom_colors) do
     vim.api.nvim_set_hl(0, group, hl)
 end
