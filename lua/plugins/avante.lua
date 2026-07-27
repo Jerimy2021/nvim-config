@@ -1,18 +1,3 @@
-local chat = require("CopilotChat")
-
-chat.setup({
-  window = {
-    layout = 'float', -- Puedes cambiarlo a 'vertical' si prefieres que salga a la derecha
-    width = 0.8,      -- Ocupa el 80% del ancho de la pantalla
-    height = 0.8,     -- Ocupa el 80% del alto
-    border = 'rounded',
-  },
-  -- Configuración para que entienda español por defecto al hacer acciones
-  prompts = {
-    Explain = {
-      prompt = '/COPILOT_EXPLAIN Explícame cómo funciona este código línea por línea en español.',
-    },
-    Optimize = -- lua/plugins/avante.lua
 require('avante_lib').load()
 require('avante').setup({
   -- ============================================================
@@ -39,10 +24,5 @@ require('avante').setup({
     auto_set_highlight_group = true,
     auto_set_keymaps = true,
     auto_apply_diff_after_generation = false,
-  },
-}),
-    Tests = {
-      prompt = '/COPILOT_TESTS Genera pruebas unitarias para este código. Responde en español.',
-    },
   },
 })
