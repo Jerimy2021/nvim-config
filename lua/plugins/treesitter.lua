@@ -2,7 +2,7 @@ require("nvim-treesitter.configs").setup({
     ensure_installed = { 
         "java", "python", "cpp", "c", "lua", "vim", 
         "vimdoc", "javascript", "html", "c_sharp", 
-        "bash", "json", "query" 
+        "bash", "json", "query", "markdown", "markdown_inline" 
     },
     
     sync_install = false,
