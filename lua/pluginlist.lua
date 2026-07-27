@@ -46,18 +46,30 @@ return {
   { "hrsh7th/cmp-buffer" },   -- Saca sugerencias de palabras que ya escribiste en el archivo
   { "hrsh7th/cmp-path" },     -- Saca sugerencias de rutas de carpetas
   { "rcarriga/cmp-dap" },     -- Saca sugerencias dentro de la consola de Debugging
-  -- Motor de plantillas de código rápido (Snippets)
+  -- Motor de plantillas de código rápido
   { "L3MON4D3/LuaSnip" },
   -- GitHub Copilot
   { "zbirenbaum/copilot.lua" },
-  -- El chat interactivo de copilot
-  { "CopilotC-Nvim/CopilotChat.nvim", 
-  	dependencies = { 
-		{ "zbirenbaum/copilot.lua" },
-		{ "nvim-lua/plenary.nvim" },
-	},
-	build = "make tiktoken",},
-
+  
+  -- 2. AGREGAMOS AVANTE
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    lazy = false,
+    version = false, 
+    build = "make",
+    dependencies = {
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "zbirenbaum/copilot.lua", -- Avante se colgará de esta cuenta
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = { file_types = { "markdown", "Avante" } },
+        ft = { "markdown", "Avante" },
+      },
+    },
+  },
   -- =============================================================================
   -- 4. NAVEGACIÓN, BÚSQUEDA Y EXPLORADOR [INTERACTIVO - USA WHICH-KEY]
   -- ¿Qué hace?: Te ayuda a moverte entre archivos y buscar texto a la velocidad de la luz.

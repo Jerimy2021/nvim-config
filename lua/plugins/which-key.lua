@@ -74,13 +74,15 @@ wk.add({
   { "<leader>ta", "<cmd>above terminal<CR>", desc = "Terminal arriba" },
   { "<leader>tv", "<cmd>vertical terminal<CR>", desc = "Terminal vertical" },
   
-  -- Copilot 
-  { "<leader>a", group = "Copilot / Inteligencia IA 🤖" },
-  { "<leader>at", "<cmd>Copilot toggle<cr>", desc = "Prender/Apagar Autocompletado" },
-  { "<leader>ap", "<cmd>Copilot panel<cr>", desc = "Abrir Panel de Sugerencias" },
-  { "<leader>ac", "<cmd>CopilotChatToggle<cr>", desc = "Abrir/Cerrar Chat" },
-  { "<leader>ae", "<cmd>CopilotChatExplain<cr>", desc = "Explicar código seleccionado" },
-  { "<leader>ag", "<cmd>CopilotChatCommit<cr>", desc = "Generar Mensaje de Commit" },
+  -- Copilot / Inteligencia IA (Avante)
+  { "<leader>a", group = "Asistente IA (Avante) 🤖" },
+  { "<leader>aa", "<cmd>AvanteAsk<cr>", desc = "Preguntar a la IA (Chat Lateral)" },
+  { "<leader>ae", "<cmd>AvanteEdit<cr>", desc = "Editar código seleccionado en vivo", mode = "v" },
+  { "<leader>ar", "<cmd>AvanteRefresh<cr>", desc = "Refrescar IA" },
+  { "<leader>at", "<cmd>AvanteToggle<cr>", desc = "Ocultar/Mostrar panel lateral" },
+  
+  -- (Opcional) Dejo el toggle del texto fantasma por si quieres apagarlo rápido
+  { "<leader>ag", "<cmd>Copilot toggle<cr>", desc = "Prender/Apagar Texto Fantasma" },
 
   { "<leader>c", group = "Competitivo / Leetcode 🏆" },
   { "<leader>cl", "<cmd>Leet<cr>", desc = "Abrir entorno LeetCode" },
