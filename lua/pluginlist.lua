@@ -11,11 +11,6 @@ return {
   build = ":TSUpdate",
   lazy = false,
   },
-  {
-   "MeanderingProgrammer/treesitter-modules.nvim",
-   dependencies = { "nvim-treesitter/nvim-treesitter" },
-   lazy = false,
-  },
   -- Resalta los paréntesis, corchetes y llaves con colores diferentes según su nivel
   { "HiPhish/rainbow-delimiters.nvim" },
 
