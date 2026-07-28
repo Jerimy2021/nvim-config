@@ -5,7 +5,17 @@ return {
   -- ¿Qué hace?: Analiza el código para darle colores ultra-precisos según el lenguaje.
   -- ¿Qué va aquí?: Plugins de colores para paréntesis, cerrar etiquetas HTML, etc.
   -- =============================================================================
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  {
+  "nvim-treesitter/nvim-treesitter",
+  branch = "main",
+  build = ":TSUpdate",
+  lazy = false,
+  },
+  {
+   "MeanderingProgrammer/treesitter-modules.nvim",
+   dependencies = { "nvim-treesitter/nvim-treesitter" },
+   lazy = false,
+  },
   -- Resalta los paréntesis, corchetes y llaves con colores diferentes según su nivel
   { "HiPhish/rainbow-delimiters.nvim" },
 
