@@ -25,7 +25,6 @@ require("plugins.treesitter")       -- Configuración de Treesitter
 require("plugins.mason")            -- Configuración de Mason
 require("plugins.nvim-cmp")         -- Configuración de nvim-cmp
 require("plugins.lspconfig")        -- Configuración de LSP
-require("plugins.snacks-picker")     	-- Configuración de snacks-picker
 -- require("plugins.comment")       -- Configuración de Comment.nvim
 require("plugins.gruvbox")       -- Configuración de Gruvbox
 -- require("plugins.tokyonight")       -- Configuracion de tokyonight

@@ -1,6 +1,0 @@
--- Mapas de teclas (Snacks Picker)
-vim.keymap.set("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Snacks: Buscar archivos" })
-vim.keymap.set("n", "<leader>fg", function() Snacks.picker.grep() end, { desc = "Snacks: Buscar texto (grep)" })
-vim.keymap.set("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Snacks: Buffers abiertos" })
-vim.keymap.set("n", "<leader>fh", function() Snacks.picker.help() end, { desc = "Snacks: Ayuda" })
-vim.keymap.set("n", "<leader>j", function() Snacks.picker.jumps() end, { desc = "Jump list" })

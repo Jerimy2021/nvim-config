@@ -102,10 +102,10 @@ wk.add({
 
   { "<leader>f", group = "Archivos / Búsqueda 🔍" },
   { "<leader>fe", "<cmd>NvimTreeToggle<cr>", desc = "Explorador Lateral" },
-  { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Buscar por nombre" },
-  { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Buscar Palabra" },
-  { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Ver Buffers" },
-  { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Buscar Ayuda" },
+  { "<leader>ff", function() Snacks.picker.files() end, desc = "Buscar por nombre" },
+  { "<leader>fg", function() Snacks.picker.grep() end, desc = "Buscar Palabra" },
+  { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Ver Buffers" },
+  { "<leader>fh", function() Snacks.picker.help() end, desc = "Buscar Ayuda" },
 
   { "<leader>h", group = "Opciones Harpoon ⚓" },
   { "<leader>ha", function() require("harpoon"):list():add() end, desc = "Marcar archivo" },
@@ -115,9 +115,9 @@ wk.add({
   { "<leader>lf", function() vim.lsp.buf.format() end, desc = "Formatear Código (Prettier/LSP) ✨" },
   { "<leader>lr", function() vim.lsp.buf.rename() end, desc = "Renombrar Variable" },
   { "<leader>la", function() vim.lsp.buf.code_action() end, desc = "Acciones de Código" },
-  { "<leader>ld", "<cmd>Telescope diagnostics<cr>", desc = "Ver Errores" },
+  { "<leader>ld", function() Snacks.picker.diagnostics() end, desc = "Ver Errores" },
   { "<leader>li", "<cmd>LspInfo<cr>", desc = "Estado de Servidores" },
-  { "<leader>lg", "<cmd>Telescope lsp_definitions<cr>", desc = "Ir a Definición" },
+  { "<leader>lg", function() Snacks.picker.lsp_definitions() end, desc = "Ir a Definición" },
   { "<leader>lR", "<cmd>LspRestart<cr>", desc = "Reiniciar LSP (Crash/Lag) 🔄" },
   { "<leader>ls", function() require('lsp_signature').toggle_float_win() end, desc = "Ver/Ocultar Info de Parámetros 🐼" },
 
