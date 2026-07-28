@@ -1,4 +1,4 @@
-require("nvim-treesitter.configs").setup({
+require("treesitter-modules").setup({
     ensure_installed = { 
         "java", "python", "cpp", "c", "lua", "vim", 
         "vimdoc", "javascript", "html", "c_sharp", 
