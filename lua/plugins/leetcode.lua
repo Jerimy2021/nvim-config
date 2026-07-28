@@ -61,7 +61,7 @@ require("leetcode").setup({
     },
 
     ---@type lc.picker
-    picker = { provider = nil },
+    picker = { provider = "snacks-picker" },
 
     hooks = {
         ---@type fun()[]

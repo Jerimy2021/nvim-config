@@ -25,7 +25,7 @@ require("plugins.treesitter")       -- Configuración de Treesitter
 require("plugins.mason")            -- Configuración de Mason
 require("plugins.nvim-cmp")         -- Configuración de nvim-cmp
 require("plugins.lspconfig")        -- Configuración de LSP
-require("plugins.telescope")     	-- Configuración de Telescope
+require("plugins.snacks-picker")     	-- Configuración de snacks-picker
 -- require("plugins.comment")       -- Configuración de Comment.nvim
 require("plugins.gruvbox")       -- Configuración de Gruvbox
 -- require("plugins.tokyonight")       -- Configuracion de tokyonight
@@ -42,7 +42,6 @@ require("plugins.hydra")			-- Configuracion de hydra
 require("plugins.mason-nvim-dap")   -- Configuracion de mason-nvim-dap
 require("plugins.nvim-dap-ui")		-- Configuracion de nvim-dap-ui
 require("plugins.nvim-dap-virtual-text") -- Configuracion de nvim-dap-virtual-text
-require("plugins.telescope-dap")	-- Configuracion de telescope-dap
 require("plugins.harpoon")			-- Configuracion de harpoon
 require("plugins.leetcode")			-- Configuracion de leetcode
 require("plugins.copilot") 			-- Configuracion de copilot

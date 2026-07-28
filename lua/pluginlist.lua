@@ -80,12 +80,8 @@ return {
   -- ¿Qué hace?: Te ayuda a moverte entre archivos y buscar texto a la velocidad de la luz.
   -- ¿Qué va aquí?: Plugins de búsqueda de texto alternativos, gestores de proyectos.
   -- =============================================================================
-  -- El buscador universal (Fuzzy Finder) para encontrar cualquier cosa
-  { 
-    "nvim-telescope/telescope.nvim", 
-    tag = "0.1.8", 
-    dependencies = { "nvim-lua/plenary.nvim" } 
-  },
+  -- búsqueda de texto y archivos con snacks de neovim.
+  { "folke/snacks.nvim", priority = 1000, lazy = false, opts = {picker = {enabled = true}} },
   -- Explorador de archivos lateral en forma de árbol
   { 
     "nvim-tree/nvim-tree.lua", 
@@ -118,8 +114,6 @@ return {
   },
   -- Escribe los valores de tus variables con texto flotante al lado de tu código
   { "theHamsta/nvim-dap-virtual-text" },
-  -- Permite buscar y controlar tus sesiones de debug usando Telescope
-  { "nvim-telescope/telescope-dap.nvim" },
 
 
   -- =============================================================================
@@ -133,7 +127,7 @@ return {
   { 
     "kawre/leetcode.nvim",
     dependencies = {
-      "nvim-telescope/telescope.nvim",
+      "folke/snacks.nvim",
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
     }
@@ -173,7 +167,7 @@ return {
   --             plugins usan para poder dibujar ventanas o gestionar tareas.
   -- ¿Qué va aquí?: Solo agregas algo aquí si un plugin de GitHub te lo pide como "dependency".
   -- =============================================================================
-  { "nvim-lua/plenary.nvim" },       -- La usa Telescope y Harpoon
+  { "nvim-lua/plenary.nvim" },       -- La usa Harpoon y otros plugins
   { "MunifTanjim/nui.nvim" },         -- La usa LeetCode y Competitest
   { "nvim-neotest/nvim-nio" },       -- La usa Dap-UI
   { "nvim-tree/nvim-web-devicons" }, -- Iconos del sistema compartidos por varios plugins
